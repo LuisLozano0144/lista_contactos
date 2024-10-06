@@ -1,4 +1,5 @@
 package com.example.navegacion
+
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.*
@@ -6,11 +7,8 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.style.TextAlign
 import kotlinx.coroutines.delay
-import androidx.compose.ui.tooling.preview.Preview
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -81,8 +79,15 @@ fun ContactForm(onRegister: (Contact) -> Unit, onShowList: () -> Unit) {
             onClick = {
                 // Validación de campos y registro
                 if (nombre.text.isNotBlank() && apellido.text.isNotBlank() && telefono.text.isNotBlank() && hobbie.text.isNotBlank()) {
-                    val contact = Contact(nombre.text, apellido.text, telefono.text, hobbie.text)
+                    // Crear una nueva instancia de Contact con los parámetros nombrados
+                    val contact = Contact(
+                        firstName = nombre.text,
+                        lastName = apellido.text,
+                        phone = telefono.text,
+                        hobby = hobbie.text
+                    )
                     onRegister(contact)
+                    // Limpiar los campos después de registrar
                     nombre = TextFieldValue("")
                     apellido = TextFieldValue("")
                     telefono = TextFieldValue("")

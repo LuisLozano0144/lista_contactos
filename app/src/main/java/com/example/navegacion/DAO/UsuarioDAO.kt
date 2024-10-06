@@ -1,17 +1,19 @@
-// UserDAO.kt
-package com.example.projecj_bd.DAO
+package com.example.navegacion
 
-import androidx.room.*
-import com.example.projecj_bd.Model.User
+import androidx.room.Dao
+import androidx.room.Delete
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
+import androidx.room.Query
 
 @Dao
-interface UserDAO {
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert(user : User)
+interface ContactDao {
+    @Query("SELECT * FROM contacts")
+    suspend fun getAllContacts(): List<Contact>
 
-    @Query("SELECT * FROM users")
-    suspend fun getAllUsers(): List<User>
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertContact(contact: Contact)
 
     @Delete
-    suspend fun delete(user: User)
+    suspend fun deleteContact(contact: Contact)
 }
